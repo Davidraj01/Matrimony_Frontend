@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+body {
+  background-color: #f9fafb;
+}
+
+button:not(:disabled),
+[type="button"]:not(:disabled),
+[type="submit"]:not(:disabled),
+[type="reset"]:not(:disabled),
+[role="button"]:not(:disabled),
+a,
+select,
+label[for] {
+  cursor: pointer;
+}
+
+button:disabled,
+[type="button"]:disabled,
+[type="submit"]:disabled {
+  cursor: not-allowed;
+}
+
+/* WeddingBackground's simple infinite loops (twinkle/sway/bob) run as CSS
+   animations rather than Framer Motion — same look, but handled on the
+   compositor thread instead of ~75 concurrent JS-driven animations. */
+@keyframes wb-star-twinkle {
+  0%, 100% { opacity: 0.45; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.35); }
+}
+@keyframes wb-light-twinkle {
+  0%, 100% { opacity: 0.65; }
+  50% { opacity: 1; }
+}
+@keyframes wb-garland-sway {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(8deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(-8deg); }
+}
+@keyframes wb-corner-sway {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.04); }
+  50% { transform: rotate(0deg) scale(1.08); }
+  75% { transform: rotate(10deg) scale(1.04); }
+}
+@keyframes wb-sparkle-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.85); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+@keyframes wb-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+@keyframes wb-rose-sway {
+  0%, 100% { transform: rotate(-6deg) scale(1); }
+  50% { transform: rotate(6deg) scale(1.06); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [style*="animation"] {
+    animation: none !important;
+  }
+}
