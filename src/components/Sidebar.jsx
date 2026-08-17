@@ -89,6 +89,26 @@ export default function Sidebar() {
       >
         Views
       </NavLink>
+
+      <NavLink
+        to="/success-stories"
+        onClick={() => setOpen(false)}
+        className={({ isActive }) =>
+          `${linkClass} ${isActive ? activeClass : ""}`
+        }
+      >
+        Success Stories
+      </NavLink>
+
+      <NavLink
+        to="/blog"
+        onClick={() => setOpen(false)}
+        className={({ isActive }) =>
+          `${linkClass} ${isActive ? activeClass : ""}`
+        }
+      >
+        Blog
+      </NavLink>
     </>
   );
 

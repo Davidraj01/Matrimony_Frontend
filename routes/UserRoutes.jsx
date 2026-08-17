@@ -23,6 +23,9 @@ const Plans = lazy(() => import("../src/pages/Plans.jsx"));
 const Chat = lazy(() => import("../src/pages/Chat.jsx"));
 const Views = lazy(() => import("../src/pages/Views.jsx"));
 const Shortlist = lazy(() => import("../src/pages/ShortList.jsx"));
+const Blog = lazy(() => import("../src/pages/Blog.jsx"));
+const BlogPost = lazy(() => import("../src/pages/BlogPost.jsx"));
+const SuccessStories = lazy(() => import("../src/pages/SuccessStories.jsx"));
 const EmailSupport = lazy(() => import("../src/pages/EmailSupport.jsx"));
 const HelpCenter = lazy(() => import("../src/pages/HelpCenter.jsx"));
 const AboutUs = lazy(() => import("../src/pages/AboutUs.jsx"));
@@ -75,6 +78,9 @@ export default function UserRoutes() {
             <Route path="/chat/:userId" element={<Chat />} />
             <Route path="/views" element={<Views />} />
             <Route path="/plans" element={<Plans />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/success-stories" element={<SuccessStories />} />
 
             <Route path="/email-support" element={<EmailSupport />} />
             <Route path="/about-us" element={<AboutUs />} />
