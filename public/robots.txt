@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /matches
+Disallow: /profile
+Disallow: /user/
+Disallow: /received
+Disallow: /sent
+Disallow: /shortlist
+Disallow: /chat/
+Disallow: /views
+Disallow: /reset-password
+Disallow: /mobileverify
+
+Sitemap: https://www.royalmatrimony.org/sitemap.xml

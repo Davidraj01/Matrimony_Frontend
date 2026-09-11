@@ -63,6 +63,26 @@ export default function UserRoutes() {
         <Route path="/mobileverify" element={<MobileVerification />} />
         <Route path="/reset-password" element={<ResetPassword />} />
 
+        {/*
+          PUBLIC CONTENT — shares the member shell (MainLayout) for a
+          consistent look, but sits outside ProtectedRoute so visitors
+          without an account (and search engines) can reach it. These pages
+          have no auth-only data dependency: Blog/BlogPost/SuccessStories
+          call unauthenticated backend endpoints, and the rest are static.
+        */}
+        <Route element={<MainLayout />}>
+          <Route path="/blog" element={<Blog />} />
+          <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/success-stories" element={<SuccessStories />} />
+          <Route path="/email-support" element={<EmailSupport />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/contact-us" element={<ContactUs />} />
+          <Route path="/refund-policy" element={<RefundPolicy />} />
+          <Route path="/help-center" element={<HelpCenter />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-conditions" element={<TermsConditions />} />
+        </Route>
+
         {/*  PROTECTED ROUTES */}
         <Route element={<ProtectedRoute />}>
           <Route element={<MainLayout />}>
@@ -78,17 +98,6 @@ export default function UserRoutes() {
             <Route path="/chat/:userId" element={<Chat />} />
             <Route path="/views" element={<Views />} />
             <Route path="/plans" element={<Plans />} />
-            <Route path="/blog" element={<Blog />} />
-            <Route path="/blog/:slug" element={<BlogPost />} />
-            <Route path="/success-stories" element={<SuccessStories />} />
-
-            <Route path="/email-support" element={<EmailSupport />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/contact-us" element={<ContactUs />} />
-            <Route path="/refund-policy" element={<RefundPolicy />} />
-            <Route path="/help-center" element={<HelpCenter />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/terms-conditions" element={<TermsConditions />} />
           </Route>
         </Route>
 

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Royal Matrimony — XML sitemap for search engine indexing.
+  Domain: https://www.royalmatrimony.org
+
+  STILL OPEN: /plans and "/" are still wrapped in <ProtectedRoute> in
+  routes/UserRoutes.jsx, so an unauthenticated visitor (and every search
+  crawler) is redirected to /login before reaching them — do not list them
+  here until that's addressed. Every other URL below has been confirmed to
+  render without a login.
+
+  Individual /blog/:slug posts are hand-added below as the content/marketing
+  team publishes them. Longer term this list should be generated from the
+  CMS/database at build or deploy time instead of maintained by hand.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <url>
+    <loc>https://www.royalmatrimony.org/register</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/blog</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/blog/chengalpattu-marriage-bureau-find-genuine-matrimony-matches-royal-matrimony</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/blog/chengalpattu-bride-and-groom-find-your-perfect-match-royal-matrimony</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/blog/matrimony-in-chengalpattu-verified-matches-profiles-royal-matrimony</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/blog/chengalpattu-matrimony-verified-bride-groom-profiles-royal-matrimony</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/blog/chengalpattu-hindu-matrimony-find-genuine-hindu-matches</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/blog/hindu-matrimony-in-chengalpattu-traditional-modern-matches</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/success-stories</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/about-us</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/contact-us</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/login</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/help-center</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/privacy-policy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/terms-conditions</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <url>
+    <loc>https://www.royalmatrimony.org/refund-policy</loc>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
