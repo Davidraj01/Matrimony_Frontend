@@ -9,6 +9,7 @@ import {
   fileUrl,
 } from "../../services/adminApi";
 import ConfirmModal from "../../components/admin/ConfirmModal";
+import RichTextEditor from "../../components/admin/RichTextEditor";
 
 const emptyForm = { title: "", body: "", tags: "", status: "draft", coverImage: null };
 
@@ -54,8 +55,14 @@ export default function AdminBlogs() {
     });
   };
 
+  const isBodyEmpty = (html) => !html || html.replace(/<[^>]*>/g, "").trim() === "";
+
   const save = async (e) => {
     e.preventDefault();
+    if (isBodyEmpty(form.body)) {
+      toast.error("Body can't be empty");
+      return;
+    }
     setSaving(true);
     try {
       const fd = new FormData();
@@ -185,7 +192,7 @@ export default function AdminBlogs() {
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-4">
           <form
             onSubmit={save}
-            className="w-full max-w-lg rounded-xl bg-white p-5 shadow-xl max-h-[85vh] overflow-y-auto"
+            className="w-full max-w-2xl rounded-xl bg-white p-5 shadow-xl max-h-[85vh] overflow-y-auto"
           >
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-base font-semibold text-gray-800">
@@ -208,13 +215,17 @@ export default function AdminBlogs() {
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Body</label>
-                <textarea
-                  required
-                  rows={6}
+                <RichTextEditor
+                  key={editing._id || "new"}
                   value={form.body}
-                  onChange={(e) => setForm({ ...form, body: e.target.value })}
-                  className="w-full rounded-lg border border-gray-300 text-sm p-2 outline-none focus:ring-2 focus:ring-pink-500"
+                  onChange={(html) => setForm((prev) => ({ ...prev, body: html }))}
+                  placeholder="Write the post..."
                 />
+                <p className="mt-1 text-xs text-gray-400">
+                  Use headings for section titles and link out with the link
+                  button — both help the post rank and read well once
+                  published.
+                </p>
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-1">

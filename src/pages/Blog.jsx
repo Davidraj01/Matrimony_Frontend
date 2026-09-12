@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import toast from "react-hot-toast";
 import { getBlogs } from "../services/blogApi";
 import { IMAGE_BASE_URL } from "../services/config";
@@ -31,6 +32,14 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6 pb-20">
+      <Helmet>
+        <title>Blog — Royal Matrimony</title>
+        <meta
+          name="description"
+          content="Tips, stories, and updates on finding your perfect match — from Royal Matrimony's verified matchmaking platform."
+        />
+        <link rel="canonical" href="https://www.royalmatrimony.org/blog" />
+      </Helmet>
       <div className={`p-6 rounded-xl text-white bg-gradient-to-r ${COLORS.primary}`}>
         <h2 className="text-xl md:text-2xl font-bold">Blog</h2>
         <p className="text-sm opacity-90 mt-1">

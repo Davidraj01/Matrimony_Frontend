@@ -62,3 +62,82 @@ button:disabled,
     animation: none !important;
   }
 }
+
+/* Rendered/edited blog post body — shared by the public BlogPost page and
+   the TipTap editor in AdminBlogs so what you type is what readers get. */
+.blog-content {
+  line-height: 1.75;
+  /* Older posts were written as plain text (no <p>/<br> tags) and relied on
+     a whitespace-pre-wrap paragraph to keep their line breaks visible. Now
+     that the body renders as real HTML, this keeps those still readable
+     without affecting new posts — TipTap's block tags butt up against each
+     other with no whitespace between them, so pre-wrap has nothing extra
+     to preserve there. */
+  white-space: pre-wrap;
+}
+.blog-content :is(p, h2, h3, h4, ul, ol, blockquote, pre) {
+  white-space: normal;
+}
+.blog-content p {
+  margin: 0 0 1em;
+}
+.blog-content p:last-child {
+  margin-bottom: 0;
+}
+.blog-content h2 {
+  font-size: 1.35em;
+  font-weight: 700;
+  margin: 1.4em 0 0.6em;
+}
+.blog-content h3 {
+  font-size: 1.15em;
+  font-weight: 700;
+  margin: 1.2em 0 0.5em;
+}
+.blog-content strong {
+  font-weight: 700;
+}
+.blog-content a {
+  color: #e94e77;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.blog-content ul,
+.blog-content ol {
+  margin: 0 0 1em;
+  padding-left: 1.5em;
+}
+.blog-content ul {
+  list-style: disc;
+}
+.blog-content ol {
+  list-style: decimal;
+}
+.blog-content li {
+  margin: 0.25em 0;
+}
+.blog-content blockquote {
+  margin: 1em 0;
+  padding: 0.25em 1em;
+  border-left: 3px solid #e94e77;
+  color: #6b7280;
+  font-style: italic;
+}
+.blog-content code {
+  background: #f3f4f6;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}
+.blog-content hr {
+  margin: 1.5em 0;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+}
+.blog-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #9ca3af;
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
