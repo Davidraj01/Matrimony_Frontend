@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import useStaticSeoOverride from "../utils/useStaticSeoOverride.js";
 import toast from "react-hot-toast";
 import { getBlogs } from "../services/blogApi";
 import { IMAGE_BASE_URL } from "../services/config";
@@ -14,6 +15,7 @@ const imageUrl = (path) => {
 };
 
 export default function Blog() {
+  useStaticSeoOverride();
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -39,6 +41,19 @@ export default function Blog() {
           content="Tips, stories, and updates on finding your perfect match — from Royal Matrimony's verified matchmaking platform."
         />
         <link rel="canonical" href="https://www.royalmatrimony.org/blog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Blog — Royal Matrimony" />
+        <meta
+          property="og:description"
+          content="Tips, stories, and updates on finding your perfect match — from Royal Matrimony's verified matchmaking platform."
+        />
+        <meta property="og:url" content="https://www.royalmatrimony.org/blog" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Blog — Royal Matrimony" />
+        <meta
+          name="twitter:description"
+          content="Tips, stories, and updates on finding your perfect match — from Royal Matrimony's verified matchmaking platform."
+        />
       </Helmet>
       <div className={`p-6 rounded-xl text-white bg-gradient-to-r ${COLORS.primary}`}>
         <h2 className="text-xl md:text-2xl font-bold">Blog</h2>

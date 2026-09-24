@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import useStaticSeoOverride from "../utils/useStaticSeoOverride.js";
 import toast from "react-hot-toast";
 import { getBlogBySlug } from "../services/blogApi";
 import { IMAGE_BASE_URL } from "../services/config";
@@ -16,6 +17,7 @@ const imageUrl = (path) => {
 };
 
 export default function BlogPost() {
+  useStaticSeoOverride();
   const { slug } = useParams();
   const [blog, setBlog] = useState(null);
   const [notFound, setNotFound] = useState(false);
@@ -74,12 +76,27 @@ export default function BlogPost() {
     publisher: { "@type": "Organization", name: "Royal Matrimony" },
     mainEntityOfPage: { "@type": "WebPage", "@id": canonicalUrl },
     keywords: (blog.tags || []).join(", "),
+    inLanguage: "en-IN",
+    url: canonicalUrl,
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Blog", item: `${SITE_URL}/blog` },
+      { "@type": "ListItem", position: 2, name: blog.title, item: canonicalUrl },
+    ],
   };
 
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6 pb-20">
       <Helmet>
-        <title>{`${blog.title} — Royal Matrimony Blog`}</title>
+        <title>
+          {/royal matrimony/i.test(blog.title)
+            ? blog.title
+            : `${blog.title} | Royal Matrimony`}
+        </title>
         <meta name="description" content={description} />
         <link rel="canonical" href={canonicalUrl} />
 
@@ -99,6 +116,7 @@ export default function BlogPost() {
         <meta name="twitter:image" content={coverImageUrl} />
 
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
 
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow overflow-hidden">
