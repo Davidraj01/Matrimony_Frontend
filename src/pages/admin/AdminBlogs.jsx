@@ -24,6 +24,8 @@ export default function AdminBlogs() {
   const [toDelete, setToDelete] = useState(null);
   const [deleting, setDeleting] = useState(false);
 
+  const [confirmDuplicate, setConfirmDuplicate] = useState(null);
+
   const load = async () => {
     setLoading(true);
     try {
@@ -57,12 +59,22 @@ export default function AdminBlogs() {
 
   const isBodyEmpty = (html) => !html || html.replace(/<[^>]*>/g, "").trim() === "";
 
-  const save = async (e) => {
-    e.preventDefault();
-    if (isBodyEmpty(form.body)) {
-      toast.error("Body can't be empty");
-      return;
-    }
+  // Catches the thing that actually created three duplicate posts in
+  // production: the same title submitted again days later because whoever
+  // wrote it didn't realize a post with that title was already published.
+  // The backend silently appends "-1" to the slug rather than rejecting it,
+  // so this is the only place that can warn before it happens.
+  const findDuplicateTitle = (title) => {
+    const normalized = title.trim().toLowerCase();
+    if (!normalized) return null;
+    return blogs.find(
+      (b) => b._id !== editing?._id && b.title.trim().toLowerCase() === normalized,
+    );
+  };
+
+  const duplicateBlog = editing ? findDuplicateTitle(form.title) : null;
+
+  const doSave = async () => {
     setSaving(true);
     try {
       const fd = new FormData();
@@ -87,6 +99,20 @@ export default function AdminBlogs() {
     } finally {
       setSaving(false);
     }
+  };
+
+  const save = async (e) => {
+    e.preventDefault();
+    if (isBodyEmpty(form.body)) {
+      toast.error("Body can't be empty");
+      return;
+    }
+    const duplicate = findDuplicateTitle(form.title);
+    if (duplicate) {
+      setConfirmDuplicate(duplicate);
+      return;
+    }
+    await doSave();
   };
 
   const confirmDelete = async () => {
@@ -212,6 +238,14 @@ export default function AdminBlogs() {
                   onChange={(e) => setForm({ ...form, title: e.target.value })}
                   className="w-full rounded-lg border border-gray-300 text-sm p-2 outline-none focus:ring-2 focus:ring-pink-500"
                 />
+                {duplicateBlog && (
+                  <p className="mt-1 text-xs text-amber-600">
+                    A {duplicateBlog.status} post with this exact title already
+                    exists (created{" "}
+                    {new Date(duplicateBlog.createdAt).toLocaleDateString()}).
+                    Saving will create a separate post, not update it.
+                  </p>
+                )}
               </div>
               <div>
                 <label className="block text-xs text-gray-500 mb-1">Body</label>
@@ -287,6 +321,20 @@ export default function AdminBlogs() {
         confirmLabel="Delete"
         onCancel={() => setToDelete(null)}
         onConfirm={confirmDelete}
+      />
+
+      <ConfirmModal
+        open={!!confirmDuplicate}
+        loading={saving}
+        danger
+        title={`A post titled "${confirmDuplicate?.title}" already exists`}
+        message={`It's currently ${confirmDuplicate?.status}. Saving this one will publish a second, separate post with the same title instead of updating the existing one.`}
+        confirmLabel="Save anyway"
+        onCancel={() => setConfirmDuplicate(null)}
+        onConfirm={async () => {
+          await doSave();
+          setConfirmDuplicate(null);
+        }}
       />
     </div>
   );
